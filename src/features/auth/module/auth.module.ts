@@ -17,7 +17,12 @@ import { JwtStrategy } from '../strategies/jwt.strategy';
       useFactory: (config: ConfigService): JwtModuleOptions => ({
         secret: config.get<string>('JWT_SECRET', 'change-me-in-production'),
         // Cast needed: ConfigService returns string, but jwt types expect branded StringValue
-        signOptions: { expiresIn: config.get<string>('JWT_EXPIRES_IN', '7d') as unknown as number },
+        signOptions: {
+          expiresIn: config.get<string>(
+            'JWT_EXPIRES_IN',
+            '7d',
+          ) as unknown as number,
+        },
       }),
     }),
   ],

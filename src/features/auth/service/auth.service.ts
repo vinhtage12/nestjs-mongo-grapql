@@ -15,7 +15,10 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string, password: string): Promise<UserDocument | null> {
+  async validateUser(
+    email: string,
+    password: string,
+  ): Promise<UserDocument | null> {
     const user = await this.usersService.findByEmail(email);
     if (!user) return null;
 
@@ -23,8 +26,11 @@ export class AuthService {
     return isMatch ? user : null;
   }
 
-  async login(user: UserDocument): Promise<{ accessToken: string }> {
-    const payload: JwtPayload = { sub: (user._id as unknown as string).toString(), email: user.email };
+  login(user: UserDocument): { accessToken: string } {
+    const payload: JwtPayload = {
+      sub: (user._id as unknown as string).toString(),
+      email: user.email,
+    };
     return { accessToken: this.jwtService.sign(payload) };
   }
 

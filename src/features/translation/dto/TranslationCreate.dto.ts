@@ -3,7 +3,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class TranslationCreateDto {
   @IsNotEmpty()
   @IsString()
-  transKey: string;
+  transKey!: string;
 
   @IsString()
   EN?: string;

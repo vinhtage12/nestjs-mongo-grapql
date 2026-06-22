@@ -3,7 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 @Schema()
 export class Translation {
   @Prop({ required: true })
-  transKey: string;
+  transKey!: string;
 
   @Prop()
   EN?: string;
